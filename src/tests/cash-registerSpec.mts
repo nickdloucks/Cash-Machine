@@ -1,8 +1,8 @@
-import checkCashRegister from '../cash-register.mjs';
+import { default as useTill } from '../cash-register.mjs';
 
 xdescribe('A cash register', ()=>{
     it('returns an object.', ()=>{
-        expect(typeof checkCashRegister(19.5, 20, [
+        expect(typeof useTill(19.5, 20, [
             ['PENNY', 1.01],
             ['NICKEL', 2.05],
             ['DIME', 3.1],
@@ -16,7 +16,7 @@ xdescribe('A cash register', ()=>{
     });
 
     it('returns correct change.', ()=>{
-        expect(checkCashRegister(19.5, 20, [
+        expect(useTill(19.5, 20, [
             ['PENNY', 1.01],
             ['NICKEL', 2.05],
             ['DIME', 3.1],
