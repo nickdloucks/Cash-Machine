@@ -18,5 +18,8 @@ function setSlot(slotName: string, slotValue: number): void{
 }
 
 function makeChange(): void{ //use as event listener for a button
-    // useTill(,,cashInTill);
+    // useTill(,, cashInTill);
 }
+
+document.getElementById('#calc-change')?.addEventListener('click', makeChange);
+// ^ calculate change given when user clicks the "Make Change" button
