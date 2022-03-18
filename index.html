@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cash Register</title>
+        <meta charset="utf-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="Cash-Till tool" />
+        <meta name="author" content="Nick Loucks" />
+        <meta name="keywords" content="Nick-Loucks" />
+
+        <!-- <link rel="manifest" href="https://nickdloucks.github.io/     <CASH -REGISTER -INTERFACE>    /manifest.json" /> -->
+        <link rel="stylesheet" type="text/css" href="./src/libs/style/nick-style-lib.css"/>
+        <link rel="stylesheet" type="text/css" href="./src/libs/style/nick-dark-mode.css"/>
+
+        <script type="module" src="./src/index.mjs" async></script>
+
+    </head>
+    <body>
+        <header>
+            <h1>Cash Till</h1>
+        </header>
+        <main>
+            <form>
+                <label for="price">Price:</label><input name="price">
+                <label for="paid">Cash given:</label><input name="paid">
+
+                <button id="calc-change" class="good-button">Make Change</button>
+
+            </form>
+            <div id="out-box">
+
+            </div>
+        </main>
+    </body>
+</html>
