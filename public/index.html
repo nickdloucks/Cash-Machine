@@ -3,18 +3,35 @@
 <head>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
+	<meta name="theme-color" content="#000000" />
+    <meta name="description" content="Cash-Machine tool" />
+    <meta name="author" content="Nick Loucks" />
+    <meta name="keywords" content="Nick-Loucks" />
 
 	<title>Cash Machine PWA</title>
 	<link rel="apple-touch-icon" href="/images/apple-touch.png">
-	<link rel="manifest" href="/js/pwa.webmanifest">
+	<link rel="manifest" href="./js/pwa.webmanifest">
 	<link rel='icon' type='image/png' href='./images/cash1.png'>
 	<link rel='stylesheet' href='./global.css'>
 	<link rel='stylesheet' href='./build/bundle.css'>
 
+	<link rel="stylesheet" type="text/css" href="./style/nick-style-lib.css"/>
+    <link rel="stylesheet" type="text/css" href="./style/nick-dark-mode.css"/>
+
 	<script defer src='./build/bundle.js'></script>
 </head>
 <body>
+	<header>
+    	<h1>Cash Till</h1>
+    </header>
+    <main>
+        <h3>Edit the amount of money in the cash machine:</h3>
+    	
+		<div id="cash-machine-ui"></div>
 
+		<div id="out-box">
+    	</div>
+    </main>
 	<!-- <span>You are now</span> <span><b class="page-status">online</b></span>
 	<script src="/js/pwa.js"></script> -->
 </body>
