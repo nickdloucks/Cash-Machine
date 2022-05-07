@@ -11,8 +11,7 @@
     "server-debug": "nodemon --inspect server.js",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "test": "jasmine",
-    "jtest": "npm run build && npm run test --silent",
-    "ignore-irrelevant-react-warning": "npm i react-scripts --save-dev && npm audit --production"
+    "jtest": "npm run build && npm run test --silent"
   },
   "repository": {
     "type": "git",
