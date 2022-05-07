@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Cash Till machine with Interface",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "dev": "nodemon ./build/index.mjs",
-    "build": "npx tsc",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear",
+    "server-debug": "nodemon --inspect server.js",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
     "test": "jasmine",
     "jtest": "npm run build && npm run test --silent",
     "ignore-irrelevant-react-warning": "npm i react-scripts --save-dev && npm audit --production"
@@ -25,16 +29,26 @@
   "devDependencies": {
     "@types/jasmine": "^3.10.3",
     "@types/node": "^17.0.14",
-    "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "tslib": "^2.0.0",
+    "@tsconfig/svelte": "^2.0.0"
   },
   "dependencies": {
     "jasmine": "^3.99.0",
-    "jasmine-spec-reporter": "^7.0.0"
+    "jasmine-spec-reporter": "^7.0.0",
+    "sirv-cli": "^2.0.0"
   },
-  "type": "module",
-  "nodemonConfig": {
-    "ext": "js css"
-  }
+  "type": "module"
 }
