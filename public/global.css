@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-	color: #333;
+	color: #ffffff;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
@@ -25,9 +25,9 @@ a:visited {
 	color: rgb(0,80,160);
 }
 
-label {
+/* label {
 	display: block;
-}
+} */
 
 input, button, select, textarea {
 	font-family: inherit;
