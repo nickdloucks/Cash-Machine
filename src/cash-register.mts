@@ -12,11 +12,6 @@
  *      given to the customer is > 0. For example, ["$TYPE", 0.0] will not appear in the return value.
  */
 
-interface TillStatus {
-  status: string, // till status: open, closed, or error
-  change: Array<Array<string | number>> | null, // 2-dimensional array with string and number types. Or null
-  message?: string // optional error message if input is not given in valid USD increments
-}
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
   price = precise(price); // Unsure money params are w/ in desired precision
