@@ -1,5 +1,18 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
+
+    
+    // function setSlot(slotName: string, slotValue: number): void{
+    //     // search cashInTill global var for the slot name
+    //     // when found, update the value of the slot.
+    // }
+    
+    // function makeChange(): void{ //use as event listener for a button
+    //     // useTill(,, cashInTill);
+    // }
+    
+    // document.getElementById('#calc-change')?.addEventListener('click', makeChange);
+    // // ^ calculate change given when user clicks the "Make Change" button
 </script>
 
 <form>
