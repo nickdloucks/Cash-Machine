@@ -1,0 +1,31 @@
+<script>
+    import { cashInTill, MONEY } from '../stores/cash-drawer';
+
+    // export let pileType; // the type of money "pile" can be either cashInTill or changePile
+    // use destructuring to access bill names/values
+    let dollar_value = MONEY[0][1];
+</script>
+
+<h2>MONEY PILE COMPONENT:</h2>
+<ol class="grid-container">
+    {#each cashInTill as bill_coin, index} <!-- this should map to the pile type-->
+        <li class="grid-item money-picture">{bill_coin[0].concat(` - $${MONEY[index][1]} X quantity`)}</li>
+    {/each}
+</ol>
+
+    <!-- <ol class="grid-container"> 
+        <li class="grid-item"><label class="money-in-label" for="pennies">pennies</label><input class="money-in" type="number" name="pennies"></li>
+        <li class="grid-item"><label class="money-in-label" for="nickles">nickles</label><input class="money-in" type="number" name="nickles"></li>
+        <li class="grid-item"><label class="money-in-label" for="dimes">dimes</label><input class="money-in" type="number" name="dimes"></li>
+        <li class="grid-item"><label class="money-in-label" for="quarters">quarters</label><input class="money-in" type="number" name="quarters"></li>
+        <li class="grid-item"><label class="money-in-label" for="1-dollar-bills">$1 bills</label><input class="money-in" type="number" name="1-dollar-bills"></li>
+        <li class="grid-item"><label class="money-in-label" for="5-dollar-bills">$5 bills</label><input class="money-in" type="number" name="5-dollar-bills"></li>
+        <li class="grid-item"><label class="money-in-label" for="10-dollar-bills">$10 bills</label><input class="money-in" type="number" name="10-dollar-bills"></li>
+        <li class="grid-item"><label class="money-in-label" for="20-dollar-bills">$20 bills</label><input class="money-in" type="number" name="20-dollar-bills"></li>
+        <li class="grid-item"><label class="money-in-label" for="50-dollar-bills">$50 bills</label><input class="money-in" type="number" name="50-dollar-bills"></li>
+        <li class="grid-item"><label class="money-in-label" for="100-dollar-bills">$100 bills</label><input class="money-in" type="number" name="100-dollar-bills"></li>
+    </ol> -->
+
+<style>
+    
+</style>
