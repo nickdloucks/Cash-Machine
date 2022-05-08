@@ -9,7 +9,7 @@ export const MONEY: Array<[string, number]> = [
     ['ONE', 1.0],
     ['FIVE', 5.0],
     ['TEN', 10.0],
-    ['TWENTY', 20.0],
+    ['TWENTY', 20.0], // ADD $50 BILL SPOT
     ['ONE HUNDRED', 100.0],
 ]; // The MONEY array represents the value of one instance of a given bill or coin
 
@@ -21,7 +21,7 @@ export let cashInTill: Array<[string, number]> = [ // Array for keeping track of
     ['ONE', 1.0],
     ['FIVE', 5.0],
     ['TEN', 10.0],
-    ['TWENTY', 20.0],
+    ['TWENTY', 20.0], // ADD $50 BILL SPOT
     ['ONE HUNDRED', 100.0],
 ];
 

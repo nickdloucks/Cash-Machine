@@ -15,6 +15,7 @@
 import { MONEY } from './stores/cash-drawer';
 
 //HANDLE EDGE CASE IN WHICH NOT ENOUGH MONEY IS GIVENT BY THE CUSTOMER??
+ // ADD $50 BILL SPOT
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
   price = precise(price); // Unsure money params are w/ in desired precision

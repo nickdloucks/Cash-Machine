@@ -17,15 +17,11 @@
 
 <form>
     
-    <label for="price">Price:</label><svelte:component this={NumberBox} value={0} name={'price'}></svelte:component>
-    
-    <label for="paid">Cash given:</label><svelte:component this={NumberBox} value={0} name={'paid'}></svelte:component>
-    
-    <button id="calc-change" class="good-button">Make Change</button>
 
+    
     <h4>Customize Cash in drawer before sale:</h4>
     <aside>(Enter the desired quanity of bills/coins in each slot, not total value of the slot.)</aside>
-    // DYNAMICALLY RENDER THIS LIST FROM THE LIST OF COIN/BILL TYPES WHICH WILL BE IN THE STORE
+    <!-- DYNAMICALLY RENDER THIS LIST FROM THE LIST OF COIN/BILL TYPES WHICH WILL BE IN THE STORE -->
     <ol class="grid-container"> 
         <li class="grid-item"><label class="money-in-label" for="pennies">pennies</label><input class="money-in" type="number" name="pennies"></li>
         <li class="grid-item"><label class="money-in-label" for="nickles">nickles</label><input class="money-in" type="number" name="nickles"></li>
@@ -44,12 +40,18 @@
 <style>
     .money-in{
         width: 3rem;
+        height: min-content;
     }
     .money-in-label{
         width: max-content;
         display: inline-block;
+        height: max-content;
+    }
+    .grid-item{
+        width: max-content
     }
     aside{
         font-size: 0.5rem;
     }
+
 </style>
