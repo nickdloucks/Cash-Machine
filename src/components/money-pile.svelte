@@ -9,7 +9,7 @@
 <h2>MONEY PILE COMPONENT:</h2>
 <ol class="grid-container">
     {#each cashInTill as bill_coin, index} <!-- this should map to the pile type-->
-        <li class="grid-item money-picture">{bill_coin[0].concat(` - $${MONEY[index][1]} X quantity`)}</li>
+        <li class="grid-item money-picture">{bill_coin[0].concat(` - $${MONEY[index][1]} X <quantity>`)}</li>
     {/each}
 </ol>
 
@@ -27,5 +27,7 @@
     </ol> -->
 
 <style>
-    
+    .money-picture{
+        width: fit-content;
+    }
 </style>

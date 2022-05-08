@@ -14,9 +14,11 @@
     section{
         width: 1fr;
     }
-
+    button{
+        width: max-content;
+    }
     .main-sale{
-
+        margin: 0px;
     }
     .main-sale-in{
 
