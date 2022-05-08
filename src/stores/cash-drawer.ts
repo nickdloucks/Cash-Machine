@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const MONEY = [
+export const MONEY: Array<[string, number]> = [
     // money value data stored in array so the recursive function can process it in order of value
     ['PENNY', 0.01],
     ['NICKEL', 0.05],
@@ -13,7 +13,7 @@ export const MONEY = [
     ['ONE HUNDRED', 100.0],
 ]; // The MONEY array represents the value of one instance of a given bill or coin
 
-export const cashInTill = [ // Array for keeping track of the till state.
+export let cashInTill: Array<[string, number]> = [ // Array for keeping track of the till state.
     ['PENNY', 0.01],
     ['NICKEL', 0.05],
     ['DIME', 0.1],
@@ -25,4 +25,5 @@ export const cashInTill = [ // Array for keeping track of the till state.
     ['ONE HUNDRED', 100.0],
 ];
 
-//  todo: factory function that generates a random till state and writes to localStorage with values
+//  to-do: factory function that generates a random till state and writes to localStorage with values:
+// localStorage.setItem('cashInTill', JSON.stringify(cashInTill));
