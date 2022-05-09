@@ -1,13 +1,13 @@
 <script lang="ts">
 	import CashPanel from './components/sort-till.svelte';
-	import moneyPile from './components/money-pile.svelte';
+	import MoneyPile from './components/money-pile.svelte';
 	import TransactionControls from './components/transaction-controls.svelte';
 </script>
 
 <main>
 	<svelte:component this={TransactionControls}></svelte:component>
 	<svelte:component this={CashPanel}></svelte:component>
-	<svelte:component this={moneyPile}></svelte:component>
+	<svelte:component this={MoneyPile}></svelte:component>
 </main>
 
 <style>

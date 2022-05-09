@@ -143,6 +143,8 @@ li{
 }
 
 .grid-container {
+    font-size: 1rem;
+    height: max-content;
     width: 1fr;
     display: grid;
     border-radius: 0.25rem;

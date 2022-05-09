@@ -48,7 +48,8 @@
         height: max-content;
     }
     .grid-item{
-        width: max-content
+        width: max-content;
+        
     }
     aside{
         font-size: 0.5rem;
