@@ -13,7 +13,7 @@ export const MONEY: Array<[string, number]> = [
     ['ONE HUNDRED', 100.0],
 ]; // The MONEY array represents the value of one instance of a given bill or coin
 
-export let cashInTill: Array<[string, number]> = [ // Array for keeping track of the till state.
+export const cashInTill = writable([ // Array for keeping track of the till state.
     ['PENNY', 0.01],
     ['NICKEL', 0.05],
     ['DIME', 0.1],
@@ -23,7 +23,9 @@ export let cashInTill: Array<[string, number]> = [ // Array for keeping track of
     ['TEN', 10.0],
     ['TWENTY', 20.0], // ADD $50 BILL SPOT
     ['ONE HUNDRED', 100.0],
-];
+]);
+
+export let changePile:  Array<[string, number]>; // Array representing change given to customer
 
 //  to-do: factory function that generates a random till state and writes to localStorage with values:
 // localStorage.setItem('cashInTill', JSON.stringify(cashInTill));
