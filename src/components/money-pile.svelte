@@ -5,6 +5,8 @@
     // use destructuring to access bill names/values
     let dollar_value = MONEY[0][1];
 
+    export const editable: boolean = true;
+
     function moneyCharacter(value: number): string{
         return (value >= 1) ? String.fromCharCode(0x24) : String.fromCharCode(0xA2); // if input value is greater than or equal to 1, 
         // return the dollar sign character, 
