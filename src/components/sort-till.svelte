@@ -1,6 +1,6 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
-
+    import MoneyPile from './money-pile.svelte';
     
     // function setSlot(slotName: string, slotValue: number): void{
     //     // search cashInTill global var for the slot name
@@ -34,7 +34,7 @@
         <li class="grid-item"><label class="money-in-label" for="50-dollar-bills">$50 bills</label><input class="money-in" type="number" name="50-dollar-bills"></li>
         <li class="grid-item"><label class="money-in-label" for="100-dollar-bills">$100 bills</label><input class="money-in" type="number" name="100-dollar-bills"></li>
     </ol>
-    
+    <svelte:component this={MoneyPile} editable={true}></svelte:component>
 </form>
 
 <style>
