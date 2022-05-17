@@ -20,20 +20,24 @@
 
     
     <h4>Customize Cash in drawer before sale:</h4>
-    <aside>(Enter the desired dollar value in each slot.)</aside>
+    <aside>(Enter the desired dollar value in each slot. Inputs will be rounded to nearest slot value interval.)</aside>
     <!-- DYNAMICALLY RENDER THIS LIST FROM THE LIST OF COIN/BILL TYPES WHICH WILL BE IN THE STORE -->
     <ol class="grid-container"> 
-        <li class="grid-item money-in-li"><label class="money-in-label" for="pennies">pennies:</label><input class="money-in" type="number" step=0.01 name="pennies"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="nickles">nickles:</label><input class="money-in" type="number" step=0.05 name="nickles"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="dimes">dimes:</label><input class="money-in" type="number" step=0.10 name="dimes"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="quarters">quarters:</label><input class="money-in" type="number" step=0.25 name="quarters"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="1-dollar-bills">$1 bills:</label><input class="money-in" type="number" step=1.0 name="1-dollar-bills"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="5-dollar-bills">$5 bills:</label><input class="money-in" type="number" step=5.0 name="5-dollar-bills"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="10-dollar-bills">$10 bills:</label><input class="money-in" type="number" step=10.0 name="10-dollar-bills"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="20-dollar-bills">$20 bills:</label><input class="money-in" type="number" step=20.0 name="20-dollar-bills"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="50-dollar-bills">$50 bills:</label><input class="money-in" type="number" step=50.0 name="50-dollar-bills"></li>
-        <li class="grid-item money-in-li"><label class="money-in-label" for="100-dollar-bills">$100 bills:</label><input class="money-in" type="number" step=100.0 name="100-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="pennies">pennies:</label><input class="money-in" type="number" min=0 step=0.01 name="pennies"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="nickles">nickles:</label><input class="money-in" type="number" min=0 step=0.05 name="nickles"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="dimes">dimes:</label><input class="money-in" type="number" min=0 step=0.10 name="dimes"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="quarters">quarters:</label><input class="money-in" type="number" min=0 step=0.25 name="quarters"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="1-dollar-bills">$1 bills:</label><input class="money-in" type="number" min=0 step=1.0 name="1-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="5-dollar-bills">$5 bills:</label><input class="money-in" type="number" min=0 step=5.0 name="5-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="10-dollar-bills">$10 bills:</label><input class="money-in" type="number" min=0 step=10.0 name="10-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="20-dollar-bills">$20 bills:</label><input class="money-in" type="number" min=0 step=20.0 name="20-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="50-dollar-bills">$50 bills:</label><input class="money-in" type="number" min=0 step=50.0 name="50-dollar-bills"></li>
+        <li class="grid-item money-in-li"><label class="money-in-label" for="100-dollar-bills">$100 bills:</label><input class="money-in" type="number" min=0 step=100.0 name="100-dollar-bills"></li>
     </ol>
+    <button class="good-button">Submit Changes to Till Slots</button>
+    <button class="neutral-button">Generate a Random Cash Drawer State</button>
+    <button class="bad-button">Empty Cash Drawer</button>
+
     <svelte:component this={MoneyPile} editable={true}></svelte:component>
 </form>
 
