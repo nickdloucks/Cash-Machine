@@ -18,7 +18,6 @@ a:hover{
 .neutral-button{
     color: #000000;
     background-color: var(--nick-blue, blue);
-    padding: 1rem;
     transition: padding border 0.5s ease-in-out 0.25s;
     border-radius: 0.25rem;
 }
