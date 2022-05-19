@@ -2,7 +2,7 @@
  * A cash-till function for processing transactions with cash. It calculates how much money
  * (and what type) will be given to the customer if change is due. This program assumes that
  * <cid> param will provide ["$TYPE", 0.0] for any empty slots in the till, and slots will be
- * sorted in ascending order by its unit value.
+ * sorted in ascending order by its unit value. NB: This is NOT a pure function and will mutate the <cid> argument. This is why a buffer copy of the changeInTill was created.
  * @param {number} price : cost of goods to customer
  * @param {number} cash : cash given by customer to pay for goods
  * @param {2-D array} cid : "cash-in-drawer"; specified ammounts for each type of bill/coin
@@ -13,16 +13,20 @@
  */
 
 import { MONEY } from './stores/cash-drawer';
+import type { Writable } from 'svelte/store';
+import type { TillStatus } from './global';
 
+// TODO: change the places where cid is mutated: it needs to be more deliberate with types (like Writable<number>) so it's auto-updating the store
+// maybe pass a copy of the CID array, mutate the copy, then update state in store using the copy
 //HANDLE EDGE CASE IN WHICH NOT ENOUGH MONEY IS GIVENT BY THE CUSTOMER??
  // ADD $50 BILL SPOT
 
-export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
+export default function checkCashRegister(price: number, cash: number, cid: Array<[string, (Writable<number> | number)]>): TillStatus {
   price = precise(price); // Unsure money params are w/ in desired precision
   cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
 
   let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
-  let changePile: Array<Array<string | number>> = []; // itemized breakdown of change to be given to the customer
+  let changePile: Array<[string, (Writable<number> | number)]> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
 
 
@@ -32,7 +36,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   }
 
   //// Till COUNTING SUBROUTINE:
-  function tillCount(arr2D: Array<Array<string | number>>) {
+  function tillCount(arr2D: Array<[string, (Writable<number> | number)]>) {
     let counter: number = 0;
     for (let i = 0; i < arr2D.length; i++) {
       counter += arr2D[i][1] as number;
