@@ -1,6 +1,7 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
     import MoneyPile from './money-pile.svelte';
+import { cashInTill, MONEY } from '../stores/cash-drawer';
     
     // function setSlot(slotName: string, slotValue: number): void{
     //     // search cashInTill global var for the slot name
@@ -40,12 +41,29 @@
 
     <svelte:component this={MoneyPile} editable={true}></svelte:component>
 </form>
-
+<form>
+    <ol class="grid-container">
+        dynamically generated inputs:
+        {#each cashInTill as bill_coin, index}
+            <li class="money-in-li">
+                <label class="money-in-label" for={MONEY[index][0]}>{MONEY[index][0]}</label>
+                <svelte:component 
+                    this={NumberBox}   
+                    value={bill_coin[1]} 
+                    name={MONEY[index][0]}
+                    min={0}
+                    step={MONEY[index][1]}>
+                </svelte:component>
+            </li>
+        {/each}
+    </ol>
+    
+</form>
 <style>
-    .money-in{
+    /* .money-in{
         width: 100px;
         height: min-content;
-    }
+    } */
     .money-in-label{
         width: max-content;
         display: inline-block;
