@@ -1,7 +1,7 @@
 import { Writable, writable } from 'svelte/store'; // import both the type and the API
 import type { writableSlots } from '../global';
 
-export const MONEY: Array<[string, number]> = [
+export const MONEY: ReadonlyArray<[string, number]> = [
     // money value data stored in array so the recursive function can process it in order of value
     ['PENNY', 0.01],
     ['NICKEL', 0.05],
