@@ -21,18 +21,7 @@
     {/each}
 </ol>
 
-    <!-- <ol class="grid-container"> 
-        <li class="grid-item"><label class="money-in-label" for="pennies">pennies</label><input class="money-in" type="number" name="pennies"></li>
-        <li class="grid-item"><label class="money-in-label" for="nickles">nickles</label><input class="money-in" type="number" name="nickles"></li>
-        <li class="grid-item"><label class="money-in-label" for="dimes">dimes</label><input class="money-in" type="number" name="dimes"></li>
-        <li class="grid-item"><label class="money-in-label" for="quarters">quarters</label><input class="money-in" type="number" name="quarters"></li>
-        <li class="grid-item"><label class="money-in-label" for="1-dollar-bills">$1 bills</label><input class="money-in" type="number" name="1-dollar-bills"></li>
-        <li class="grid-item"><label class="money-in-label" for="5-dollar-bills">$5 bills</label><input class="money-in" type="number" name="5-dollar-bills"></li>
-        <li class="grid-item"><label class="money-in-label" for="10-dollar-bills">$10 bills</label><input class="money-in" type="number" name="10-dollar-bills"></li>
-        <li class="grid-item"><label class="money-in-label" for="20-dollar-bills">$20 bills</label><input class="money-in" type="number" name="20-dollar-bills"></li>
-        <li class="grid-item"><label class="money-in-label" for="50-dollar-bills">$50 bills</label><input class="money-in" type="number" name="50-dollar-bills"></li>
-        <li class="grid-item"><label class="money-in-label" for="100-dollar-bills">$100 bills</label><input class="money-in" type="number" name="100-dollar-bills"></li>
-    </ol> -->
+
 <ol class="grid-container">
     <li class="grid-item money-picture cent-picture">1&cent;</li>
     <li class="grid-item money-picture dollar-picture">1&#36;</li>
