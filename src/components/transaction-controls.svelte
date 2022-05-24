@@ -54,6 +54,6 @@
 
     }
     .main-sale-button{
-
+        float:inline-end;
     }
 </style>
