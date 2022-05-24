@@ -1,8 +1,10 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
     import MoneyPile from './money-pile.svelte';
-import { cashInTill, MONEY } from '../stores/cash-drawer';
+import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
     
+
+// function prevent(e: KeyboardEvent) {e.code != '38' && e.code != '40' && e.preventDefault();}
     // function setSlot(slotName: string, slotValue: number): void{
     //     // search cashInTill global var for the slot name
     //     // when found, update the value of the slot.
@@ -14,6 +16,10 @@ import { cashInTill, MONEY } from '../stores/cash-drawer';
 
     // document.getElementById('#calc-change')?.addEventListener('click', makeChange);
     // // ^ calculate change given when user clicks the "Make Change" button
+
+
+
+    // bind:value={bill_coin[1]}
 </script>
 
 <form>
@@ -26,10 +32,10 @@ import { cashInTill, MONEY } from '../stores/cash-drawer';
                 <label class="money-in-label" for={MONEY[index][0]}>{MONEY[index][0]}</label>
                 <svelte:component 
                     this={NumberBox}   
-                    value={bill_coin[1]} 
+                    drawerSlot={drawerSlots[index]}
                     name={MONEY[index][0]}
-                    min={0}
-                    step={MONEY[index][1]}>
+                    step={MONEY[index][1]}
+                    >
                 </svelte:component>
             </li>
         {/each}
