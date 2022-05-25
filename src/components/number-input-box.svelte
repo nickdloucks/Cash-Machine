@@ -10,14 +10,16 @@
     export const minimum: number = 0;
 
     // VALIDATING INPUT FUNCTION
+    
+    // TODO: event needs to have a type, is setting a drawerslot and value attributes redundant? maybe inconsistent?
 
-    // export let editable: boolean = false;
-    // handler function for updating till slot value connected to this input,
-    // or figure out how to link it to a devrived store variable
     function validateSlotIn(inputVal: number = val, interval: number = step): void{ // validate user input for the drawer slot
         if ((inputVal % interval) > 0){ // if user input is not evenly divisible by the money value for the current slot, round down to nearest interval
             inputBox.value = String(inputVal - (inputVal % interval));
         }
+    }
+    function inevent(e){
+        e.target.value
     }
 </script>
 
