@@ -20,6 +20,9 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
 
 
     // bind:value={bill_coin[1]}
+    function handleSubmit(e:SubmitEvent): void{
+        e.preventDefault();
+    }
 </script>
 
 <form>
@@ -40,7 +43,7 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
             </li>
         {/each}
     </ol>
-    <button class="good-button">Submit Changes to Till Slots</button>
+    <button class="good-button" type="submit" on:submit={handleSubmit}>Submit Changes to Till Slots</button>
     <button class="neutral-button">Generate a Random Cash Drawer State</button>
     <button class="bad-button">Empty Cash Drawer</button>
 
