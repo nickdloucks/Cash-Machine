@@ -47,7 +47,6 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
     <button class="neutral-button">Generate a Random Cash Drawer State</button>
     <button class="bad-button">Empty Cash Drawer</button>
 
-    <svelte:component this={MoneyPile} editable={true}></svelte:component>
 </form>
 
 <style>
