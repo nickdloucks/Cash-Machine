@@ -1,6 +1,5 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
-    import MoneyPile from './money-pile.svelte';
 import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
     
 
@@ -25,7 +24,7 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
     }
 </script>
 
-<form>
+<form class="money-pile-display">
     <h4>Customize Cash in drawer before sale:</h4>
     <aside>(Enter the desired dollar value in each slot. Inputs will be rounded to nearest slot value interval.)</aside>
     <ol class="grid-container">
@@ -50,6 +49,9 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
 </form>
 
 <style>
+    .money-pile-display{
+        background-image: linear-gradient(45deg, #000000, #808080);
+    }
     .money-in-label{
         width: max-content;
         display: inline-block;
