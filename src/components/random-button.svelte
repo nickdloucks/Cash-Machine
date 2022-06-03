@@ -1,10 +1,12 @@
 <script lang="ts">
     import {drawerSlots, MONEY} from '../stores/cash-drawer';
 
-    const randomize = function(): void{
+    const randomize = function(event: MouseEvent): void{
+        event.preventDefault();
         const randNum = function(val: number): number{
             // Use a money value to multiply with a randomly generated number.
             let num = Math.round((Math.random() * Math.random() - Math.random() + Math.random()) * 100);
+            num = (num * 100) / 100;
             return (num < 0) ? 0 : num * val; // no negative values allowed
         }
         drawerSlots.forEach((slot, index: number): void =>{
