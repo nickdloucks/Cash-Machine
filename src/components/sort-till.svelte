@@ -1,6 +1,7 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
-import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
+    import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
+    import RandomButton from './random-button.svelte';
     
 
 // function prevent(e: KeyboardEvent) {e.code != '38' && e.code != '40' && e.preventDefault();}
@@ -43,7 +44,8 @@ import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
         {/each}
     </ol>
     <button class="good-button" type="submit" on:submit={handleSubmit}>Submit Changes to Till Slots</button>
-    <button class="neutral-button">Generate a Random Cash Drawer State</button>
+    <!-- <button class="neutral-button">Generate a Random Cash Drawer State</button> -->
+    <svelte:component this={RandomButton}></svelte:component>
     <button class="bad-button">Empty Cash Drawer</button>
 
 </form>
