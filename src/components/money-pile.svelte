@@ -17,7 +17,7 @@
 <h2>MONEY PILE COMPONENT:</h2>
 <ol class="grid-container">
     {#each cashInTill as bill_coin, index} <!-- this should map to the pile type-->
-        <li class="grid-item money-picture">{bill_coin[0].concat(` ${moneyCharacter(MONEY[index][1])} - $${MONEY[index][1]} X <quantity>`)}</li>
+        <li class="grid-item money-picture">{bill_coin[0].concat(` ${moneyCharacter(MONEY[index][1])} - $${MONEY[index][1].toFixed(2)} X <quantity>`)}</li>
     {/each}
 </ol>
 
