@@ -39,6 +39,7 @@
                     drawerSlot={drawerSlots[index]}
                     name={MONEY[index][0]}
                     step={MONEY[index][1]}
+                    editable={false}
                     >
                 </svelte:component>
             </li>
