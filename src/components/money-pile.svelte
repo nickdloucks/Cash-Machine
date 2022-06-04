@@ -33,13 +33,16 @@
         font-weight: bold;
         width: fit-content;
         color: #000000;
+        height: 6rem;
     }
     .cent-picture{
         background-color: #cccccc;
         border-radius: 100%;
+        height: fit-content;
     }
     .dollar-picture{
         background-color: #008800;
-        border-radius: 2px;
+        border-radius: 5%;
+        height: fit-content;
     }
 </style>
