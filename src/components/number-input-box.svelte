@@ -12,7 +12,7 @@
     
     const ELEMENT_ID = name.concat('-input-box');
 
-    $: slotTotal = Number($drawerSlot); // Dollar slotTotal for this slot; default to an empty slot
+    $: slotTotal = Number($drawerSlot) || 0; // Dollar value Total for this slot; default to an empty slot
     $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
     // VALIDATE INPUT ON SUBMIT AND PREVENT PAGE LOAD
     
