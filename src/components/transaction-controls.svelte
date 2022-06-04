@@ -34,10 +34,10 @@
 
 <section class="grid-container main-sale">
     <label class="money-in-label main-sale-in" for="price">Price:</label>
-    <svelte:component class="money-in" this={NumberBox} value={0} name={'price'} editable={true}></svelte:component>
+    <svelte:component class="money-in" this={NumberBox} value={0} name={'price'} step={0.01} editable={true}></svelte:component>
     
     <label class="money-in-label main-sale-in" for="paid">Cash given:</label>
-    <svelte:component class="money-in" this={NumberBox} value={0} name={'paid'}></svelte:component>
+    <svelte:component class="money-in" this={NumberBox} value={0} name={'paid'} step={0.01} editable={true}></svelte:component>
     
     <button class="good-button main-sale-button" id="calc-change" on:click={changeWrapper}>Make Change</button>
 </section>
