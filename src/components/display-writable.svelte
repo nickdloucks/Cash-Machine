@@ -3,4 +3,4 @@
     export let storeVal: Writable<number>;
 </script>
 
-<p>{$storeVal}</p>
+<p>{'$ '.concat($storeVal.toFixed(2))}</p>
