@@ -5,22 +5,6 @@
     import EmptyButton from './empty-drawer.svelte';
     
 
-// function prevent(e: KeyboardEvent) {e.code != '38' && e.code != '40' && e.preventDefault();}
-    // function setSlot(slotName: string, slotValue: number): void{
-    //     // search cashInTill global var for the slot name
-    //     // when found, update the value of the slot.
-    // }
-
-    // function makeChange(): void{ //use as event listener for a button
-    //     // useTill(,, cashInTill);
-    // }
-
-    // document.getElementById('#calc-change')?.addEventListener('click', makeChange);
-    // // ^ calculate change given when user clicks the "Make Change" button
-
-
-
-    // bind:value={bill_coin[1]}
     function handleSubmit(e:SubmitEvent): void{
         e.preventDefault();
     }
@@ -30,7 +14,6 @@
     <h4>Customize Cash in drawer before sale:</h4>
     <aside>(Enter the desired dollar value in each slot. Inputs will be rounded to nearest slot value interval.)</aside>
     <ol class="grid-container">
-        dynamically generated inputs:
         {#each cashInTill as bill_coin, index}
             <li class="money-in-li">
                 <label class="money-in-label" for={MONEY[index][0]}>{MONEY[index][0]}</label>
@@ -54,8 +37,11 @@
 </form>
 
 <style>
+    h4, aside{
+        color: #00bfff;
+    }
     .money-pile-display{
-        background-image: linear-gradient(45deg, #000000, #808080);
+        background-image: linear-gradient(45deg, #111111, #313131, #808080);
     }
     .money-in-label{
         width: max-content;
