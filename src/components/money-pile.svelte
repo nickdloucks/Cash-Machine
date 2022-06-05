@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cashInTill, MONEY } from '../stores/cash-drawer';
+    import { cashInTill, changePile, MONEY } from '../stores/cash-drawer';
     import type {Writable} from 'svelte/store';
     import type { MoneyInstance } from '../global';
 
@@ -23,8 +23,10 @@
 
 <h2>MONEY PILE COMPONENT:</h2>
 <ol class="grid-container">
-    {#each cashInTill as bill_coin, index} <!-- this should map to the pile type-->
-        <li class="grid-item money-picture">{bill_coin[0].concat(` ${moneyCharacter(MONEY[index][1])} - $${MONEY[index][1].toFixed(2)} X <quantity>`)}</li>
+    {#each changePile as bill_coin, index} <!-- this should map to the pile type-->
+        <li class="grid-item money-picture">
+            {bill_coin[0].concat(` ${moneyCharacter(MONEY[index][1])} - $${Number(changePile[index][1]).toFixed(2)} X <quantity>`)}
+        </li>
     {/each}
 </ol>
 

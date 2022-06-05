@@ -1,5 +1,5 @@
 import { Writable, writable } from 'svelte/store'; // import both the type and the API
-import type { writableSlots } from '../global';
+import type { MoneyInstance, writableSlots } from '../global';
 
 export const MONEY: ReadonlyArray<[string, number]> = [
     // Money value data stored in array so the recursive function can process it in order of value.
@@ -15,18 +15,6 @@ export const MONEY: ReadonlyArray<[string, number]> = [
     ['TWENTY', 20.0], // ADD $50 BILL SPOT
     ['ONE HUNDRED', 100.0],
 ];
-
-// export let drawerSlots: writableSlots = {
-//     tillPennies: writable(0.01),
-//     tillNickles: writable(0.5),
-//     tillDimes: writable(0.1),
-//     tillQuarters: writable(0.25),
-//     tillOnes: writable(1.0),
-//     tillFives: writable(5.0),
-//     tillTens: writable(10.0),
-//     tillTwenties: writable(20.0),
-//     tillHundreds: writable(100.0)
-// }
 
 export const price = writable(10);
 export const paid = writable(20);
@@ -58,7 +46,17 @@ export const cashInTill: Array<[string, (Writable<number> | number)]> = [
 ];
 
 // Array representing change given to customer after a sale:
-export let changePile: Array<[string, (Writable<number> | number)]> | []; 
+export let changePile: Array<MoneyInstance> = [
+  ['PENNY', 1.01],
+  ['NICKEL', 2.05],
+  ['DIME', 3.1],
+  ['QUARTER', 4.25],
+  ['ONE', 90],
+  ['FIVE', 55],
+  ['TEN', 20],
+  ['TWENTY', 60],
+  ['ONE HUNDRED', 100],
+];
 
 //  to-do: factory function that generates a random till state and writes to localStorage with values:
 // localStorage.setItem('cashInTill', JSON.stringify(cashInTill));
