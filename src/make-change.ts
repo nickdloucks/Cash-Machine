@@ -14,19 +14,19 @@
 
 import { MONEY } from './stores/cash-drawer';
 import type { Writable } from 'svelte/store';
-import type { TillStatus } from './global';
+import type { MoneyInstance, TillStatus } from './global';
 
 // TODO: change the places where cid is mutated: it needs to be more deliberate with types (like Writable<number>) so it's auto-updating the store
 // maybe pass a copy of the CID array, mutate the copy, then update state in store using the copy
 //HANDLE EDGE CASE IN WHICH NOT ENOUGH MONEY IS GIVENT BY THE CUSTOMER??
  // ADD $50 BILL SPOT
 
-export default function checkCashRegister(price: number, cash: number, cid: Array<[string, (Writable<number> | number)]>): TillStatus {
+export default function checkCashRegister(price: number, cash: number, cid: Array<MoneyInstance>): TillStatus {
   price = precise(price); // Unsure money params are w/ in desired precision
   cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
 
   let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
-  let changePile: Array<[string, (Writable<number> | number)]> = []; // itemized breakdown of change to be given to the customer
+  let changePile: Array<MoneyInstance> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
 
 
@@ -36,7 +36,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   }
 
   //// Till COUNTING SUBROUTINE:
-  function tillCount(arr2D: Array<[string, (Writable<number> | number)]>) {
+  function tillCount(arr2D: Array<MoneyInstance>) {
     let counter: number = 0;
     for (let i = 0; i < arr2D.length; i++) {
       counter += arr2D[i][1] as number;
