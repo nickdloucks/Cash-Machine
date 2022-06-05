@@ -181,7 +181,7 @@ li{
 .grid-item{
     width: max-content;
     margin: 1em, 3em;
-    
+    text-align: center;
 }
 
 label{
