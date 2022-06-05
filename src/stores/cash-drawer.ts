@@ -28,6 +28,9 @@ export const MONEY: ReadonlyArray<[string, number]> = [
 //     tillHundreds: writable(100.0)
 // }
 
+export const price = writable(10);
+export const paid = writable(20);
+
 // These Svelte store writables represent stateful slots in the cash drawer. They are readable and writable.
 export const tillPennies = writable(0.01);
 export const tillNickles = writable(0.05);
