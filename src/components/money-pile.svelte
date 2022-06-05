@@ -35,6 +35,7 @@
     <li class="grid-item money-picture dollar-picture">1&#36;</li>
 </ol>
 
+<!-- THE CHANGEPILE IN STORE IS UNDEFINED UNTIL CHANGE IS MADE: NEED A STARTER/DEFAULT VALUE THAT IS ARRAY-LIKE IN ORDER TO MAP THIS COMPONENT OVER THE DATA -->
 <!-- <ol class="grid-container">
     {#each thisPile as bill_coin, index}
         <li class="grid-item money-picture">{bill_coin[0]}:{bill_coin[1]}</li>
