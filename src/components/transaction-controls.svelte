@@ -57,7 +57,7 @@
                 editable={true}></svelte:component>
         </span>   
     </section>
-    <button class="good-button main-sale-button" id="calc-change" on:click={changeWrapper}>Make Change</button>
+    <button class="good-button" id="calc-change" on:click={changeWrapper}>Make Change</button>
 </form>
 
 <style>
@@ -78,8 +78,5 @@
     }
     .main-sale-in{
         width: fit-content;
-    }
-    .main-sale-button{
-        /* float:inline-end; */
     }
 </style>
