@@ -1,10 +1,13 @@
 <script lang="ts">
     import { cashInTill, MONEY } from '../stores/cash-drawer';
+    import type {Writable} from 'svelte/store';
 
     // export let pileType; // the type of money "pile" can be either cashInTill or changePile
     // use destructuring to access bill names/values
     let dollar_value = MONEY[0][1];
 
+    // PASS THE STORE VALUE <changePile> to the <pile> prop here:
+    export let pile: Array<[string, (Writable<number> | number)]> | [];
     export const editable: boolean = true;
 
     function moneyCharacter(value: number): string{
@@ -26,6 +29,12 @@
 <ol class="grid-container">
     <li class="grid-item money-picture cent-picture">1&cent;</li>
     <li class="grid-item money-picture dollar-picture">1&#36;</li>
+</ol>
+
+<ol class="grid-container">
+    {#each pile as bill_coin, index}
+        <li class="grid-item money-picture">{bill_coin[0]}:{bill_coin[1]}</li>
+    {/each}
 </ol>
 
 <style>
