@@ -32,30 +32,40 @@
     }
 </script>
 
-<section class="grid-container main-sale">
-    <label class="money-in-label main-sale-in" for="price">Price:</label>
-    <svelte:component class="money-in" this={NumberBox} value={0} name={'price'} step={0.01} editable={true}></svelte:component>
-    
-    <label class="money-in-label main-sale-in" for="paid">Cash given:</label>
-    <svelte:component class="money-in" this={NumberBox} value={0} name={'paid'} step={0.01} editable={true}></svelte:component>
-    
+<section class="wrapper">
+    <section class="grid-container main-sale">
+        <span class="grid-item main-sale-in">
+            <label class="money-in-label" for="price">Price:</label>
+            <svelte:component class="money-in" this={NumberBox} value={0} name={'price'} step={0.01} editable={true}></svelte:component>
+        </span>
+        <span class="grid-item main-sale-in">
+            <label class="money-in-label" for="paid">Cash given:</label>
+            <svelte:component class="money-in" this={NumberBox} value={0} name={'paid'} step={0.01} editable={true}></svelte:component>
+        </span>   
+    </section>
     <button class="good-button main-sale-button" id="calc-change" on:click={changeWrapper}>Make Change</button>
 </section>
 
 <style>
-    section{
-        width: 1fr;
+    .wrapper{
+        width: 100%;
+        background-image: linear-gradient(80deg, #818181, #313131, #111111);
+        margin: 0;
     }
     button{
         width: max-content;
     }
     .main-sale{
         margin: 0px;
+        background-color: #000000;
+        border-radius: .25rem;
+        padding: 1.5em;
+        height: max-content;
     }
     .main-sale-in{
-
+        width: fit-content;
     }
     .main-sale-button{
-        float:inline-end;
+        /* float:inline-end; */
     }
 </style>
