@@ -201,3 +201,8 @@ th{
     color: #ffffff;
 }
 
+.icon{
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+}
