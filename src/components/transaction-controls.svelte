@@ -32,7 +32,7 @@
     }
 </script>
 
-<section class="wrapper">
+<form class="wrapper">
     <section class="grid-container main-sale">
         <span class="grid-item main-sale-in">
             <label class="money-in-label" for="price">Price:</label>
@@ -58,7 +58,7 @@
         </span>   
     </section>
     <button class="good-button main-sale-button" id="calc-change" on:click={changeWrapper}>Make Change</button>
-</section>
+</form>
 
 <style>
     .wrapper{
