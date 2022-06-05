@@ -11,6 +11,8 @@ declare interface writableSlots {
   [keys: string]: Writable<number>
 }
 
+declare type MoneyInstance = [string, (number | Writable<number>)];
+
 // enum MoneyTypes{
 //   1 = 'PENNY',
 //   2 = 'NICKLE',
