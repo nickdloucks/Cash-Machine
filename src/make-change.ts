@@ -105,7 +105,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
       }
       return;
     }
-    recurseCount(stillDue_$, 8);
+    recurseCount(stillDue_$, cid.length - 1);
     ///////////////////////////////////////
   }
   if (stillDue_$ > 0.0001) {
