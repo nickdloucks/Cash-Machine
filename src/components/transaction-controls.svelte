@@ -33,7 +33,7 @@
     // NEED DRAWER SLOT PROPS BELOW:
 </script>
 
-<form class="wrapper">
+<section class="wrapper">
     <section class="grid-container main-sale">
         <span class="grid-item main-sale-in">
             <label class="money-in-label" for="price">Price:</label>
@@ -57,7 +57,7 @@
         </span>   
     </section>
     <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button>
-</form>
+</section>
 
 <style>
     .wrapper{
