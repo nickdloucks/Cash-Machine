@@ -22,10 +22,10 @@ import type { MoneyInstance, TillStatus } from './global';
  // ADD $50 BILL SPOT
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<MoneyInstance>): TillStatus {
-  price = precise(price); // Unsure money params are w/ in desired precision
+  price = precise(price); // Ensure money params are w/ in desired precision
   cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
 
-  let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
+  let stillDue_$ = cash - price; // Init. variable: amount of money the customer is still owed
   let changePile: Array<MoneyInstance> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
 
@@ -48,15 +48,15 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
 
 
   //==== MAIN BODY OF ALGORITHM ============
-  if (totalTill < $stillDue) { // Not enough money left in the till to make change for this cash amount.
+  if (totalTill < stillDue_$) { // Not enough money left in the till to make change for this cash amount.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
-  } else if (totalTill === $stillDue) {
+  } else if (totalTill === stillDue_$) {
     // customer is owed the exact ammount of change in the till
     // give customer all the change and close out the till
     return { status: 'CLOSED', change: cid };
-  } else { // when totalTill > $stillDue
+  } else { // when totalTill > stillDue_$
     ////////////////////////////////////////////////////////////////////////////////////
-    function recurseCount(owed_$: number = $stillDue, index_$: number): void {
+    function recurseCount(owed_$: number = stillDue_$, index_$: number): void {
       if (owed_$ === 0 || index_$ < 0) {  // Stop recursion if no more money is owed,
         return; // or there are no more types/units of money that could be given out for the remainder.
       }
@@ -95,20 +95,20 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
         remainder += maxFromSlot - giveFromSlot; // if there wasn't enough in the slot to give out the maximum possible,
         // then add the difference to the remainder and recurse on the remainder
 
-        $stillDue = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating $stillDue inadvertently decoupled the process from 
+        stillDue_$ = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating stillDue_$ inadvertently decoupled the process from 
         // what was actually still owed to the customer, thus the program would never think it had given out enough change.
-        // setting $stillDue equal to <remainder> fixes that.
-        $stillDue = precise($stillDue); // keep the decimal numbers precise
+        // setting stillDue_$ equal to <remainder> fixes that.
+        stillDue_$ = precise(stillDue_$); // keep the decimal numbers precise
 
-        recurseCount($stillDue, index_$ - 1);
+        recurseCount(stillDue_$, index_$ - 1);
         return;
       }
       return;
     }
-    recurseCount($stillDue, 8);
+    recurseCount(stillDue_$, 8);
     ///////////////////////////////////////
   }
-  if ($stillDue > 0.0001) {
+  if (stillDue_$ > 0.0001) {
     // At this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
