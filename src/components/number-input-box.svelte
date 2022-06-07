@@ -1,7 +1,5 @@
 <script lang="ts">
     import type {Writable} from 'svelte/store';
-    import DisplayWritable from './display-writable.svelte';
-
 
     export let drawerSlot: Writable<number>; // configure to be usable by main transaction: use ternary operator  
     export let name: string; // IS THIS THE NAME OF THE MONEY VALUE FOUND IN THE TILL STORE?
@@ -14,7 +12,6 @@
 
     $: slotTotal = Number($drawerSlot) || 0; // Dollar value Total for this slot; default to an empty slot
     $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
-    // VALIDATE INPUT ON SUBMIT AND PREVENT PAGE LOAD
     
     const directlyEditable = function(){
         return !editable;
@@ -35,7 +32,6 @@
 
         readonly={directlyEditable()}
         >
-    <!-- <svelte:component this={DisplayWritable} storeVal={drawerSlot}></svelte:component> -->
     <p>{slotDisplay}</p>
 </span>
 
