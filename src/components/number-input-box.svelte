@@ -10,9 +10,21 @@
     
     const ELEMENT_ID = name.concat('-input-box');
 
-    $: slotTotal = Number($drawerSlot) || 0; // Dollar value Total for this slot; default to an empty slot
+    $: slotTotal = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
     $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
     
+    const validate = function(event: MouseEvent):void{ // validate user input and alter the value in the drawer store
+        event.preventDefault();
+
+        if((slotTotal % step) !== 0){
+            slotTotal -= (slotTotal % step);
+        }
+
+        drawerSlot.update(n => n = Math.floor(100 * slotTotal) / 100);
+    }
+    // let extra = ((slotTotal % step) > 0) ? slotTotal % step : 0;
+    // 
+
     const directlyEditable = function(){
         return !editable;
     }
@@ -25,14 +37,16 @@
         type="number"
         inputmode="numeric"
         name={name}
-        bind:value={$drawerSlot} 
+        bind:value={slotTotal} 
         placeholder={'$ 0.00'}
         min={minimum}
         step={step}
 
         readonly={directlyEditable()}
         >
+    <button on:click={validate}>set</button>
     <p>{slotDisplay}</p>
+    <p>{$drawerSlot}</p>
 </span>
 
 <style>
