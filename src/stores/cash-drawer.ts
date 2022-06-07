@@ -69,5 +69,18 @@ export let changePile: Array<MoneyInstance> = [
   ['ONE HUNDRED', 0.000],
 ];
 
+// RANDOM TILL STATE:
+// [
+// ['PENNY', 0.19],
+// ['NICKEL', 2.35],
+// ['DIME', 2.9],
+// ['QUARTER', 16.5],
+// ['ONE', 26],
+// ['FIVE', 105],
+// ['TEN', 380],
+// ['TWENTY', 520],
+// ['ONE HUNDRED', 200]
+// ]
+
 //  to-do: factory function that generates a random till state and writes to localStorage with values:
 // localStorage.setItem('cashInTill', JSON.stringify(cashInTill));
