@@ -28,7 +28,7 @@
             </li>
         {/each}
     </ol>
-    <button class="good-button" type="submit" on:submit={handleSubmit}>Submit Changes to Till Slots</button>
+    <!-- <button class="good-button" type="submit" on:submit={handleSubmit}>Submit Changes to Till Slots</button> -->
     <!-- <button class="neutral-button">Generate a Random Cash Drawer State</button> -->
     <svelte:component this={RandomButton}></svelte:component>
     <!-- <button class="bad-button">Empty Cash Drawer</button> -->
