@@ -1,26 +1,30 @@
 <script lang="ts">
     import type {Writable} from 'svelte/store';
+    // import validate function for event handler, test separately
 
     export let drawerSlot: Writable<number>; // configure to be usable by main transaction: use ternary operator  
-    export let name: string;
-    export let billCoinVal: number; // the dollar value of one bill or coin in this drawer slot. EX: a penny slot's "billCoinVal" would be ($) 0.01
-    export let editable: boolean; // WHAT IF EDITABLE PROP IS NOT PROVIDED??
 
-    const minimum: number = 0;
+    export let name: string;
+    export let slotUnitVal: number; // the dollar value of ONE bill/coin in this particular drawer slot. EX: a penny slot's "slotUnitVal" would be ($) 0.01
+    export let editable: boolean; // WHAT IF EDITABLE PROP IS NOT PROVIDED??
     
 
-    $: slotTotal = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
-    $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
-    $: remainder = slotTotal % billCoinVal;
 
-    const validate = function(event: MouseEvent):void{ // validate user input and alter the value in the drawer store
-        event.preventDefault();
+    const minimum: number = 0;
+    // slot total will initially be 0, while store value for the slot is displayed to side
 
-        if((remainder) !== 0){
-            slotTotal -= (remainder);
-        }
+    $: roundedSlot = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
+    $: slotDisplay = "$ ".concat(String(roundedSlot.toFixed(2)));
 
-        drawerSlot.update(n => n = Math.floor(100 * slotTotal) / 100);
+
+    $: validatedTotal = Math.round(roundedSlot / slotUnitVal);
+
+    const validate = function(event: any, userInput: number = validatedTotal, unitVal: number = slotUnitVal):void{ // validate user input and alter the value in the drawer store
+        event.preventDefault(); // Prevent page reload
+        userInput = Math.round(userInput); // validate input: must be an integer
+        console.log('rounded input' + userInput)
+        let newSlotTotal = userInput * unitVal; // multiply the slot's unit value by the unit count (example: 2 $5 bills means a total slot value of $10)
+        drawerSlot.update(n => n = Math.round(100 * newSlotTotal) / 100); // update the drawersSlot store value, rounded to the nearest penny
     }
 
     const directlyEditable = function(){
@@ -28,23 +32,46 @@
     }
 </script>
 
-<span>
-    <label for={name}>{name}</label>
-    <input 
+<li class="grid-item">
+    <div class="slot-card">
+        <label for={name} class="slot-label">{name}</label>
+        <input 
+            class="money-slot-input"
+            type="number"
+            inputmode="numeric"
+            step=1
+            name={name}
+            min={minimum}
+            placeholder={String(minimum)}
+            bind:value={validatedTotal}
+            readonly={directlyEditable()}
+            on:input={validate}
+            on:change={validate}
+            >
 
-        class="money-in"
-        type="number"
-        inputmode="numeric"
-        name={name}
-        bind:value={slotTotal} 
-        placeholder={'$ 0.00'}
-        min={minimum}
-        step=1
+        <p>display: {slotDisplay}</p>
+        <p>Store: {$drawerSlot}</p>
+        <!-- <p>{remainder}</p> -->
+    </div>
+</li>
 
-        readonly={directlyEditable()}
-        >
-    <button on:click={validate}>set</button>
-    <p>{slotDisplay}</p>
-    <p>{$drawerSlot}</p>
-    <p>{remainder}</p>
-</span>
+        <!-- <button on:click={validate}>set</button> -->
+
+<style>
+    .slot-label{
+        width: max-content;
+        display: inline-block;
+        height: max-content;
+        
+    }
+    .slot-card{
+        width: min-content;
+        background-image:radial-gradient(#556b2f, #008800);
+        border-radius: 0.5em;
+    }
+    .money-slot-input{
+        width: 3rem;
+        height: min-content;
+        
+    }
+</style>
