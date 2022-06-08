@@ -4,13 +4,12 @@
     import GiveChangeButton from './give-change-button.svelte';
 </script>
 
-<form class="wrapper">
+<section class="wrapper">
     <section class="grid-container main-sale">
         <span class="grid-item main-sale-in">
             <label class="money-in-label" for="price">Price:</label>
             <svelte:component 
                 this={NumberBox} 
-                 
                 name={'price'} 
                 step={0.01} 
                 drawerSlot={price}
@@ -20,7 +19,6 @@
             <label class="money-in-label" for="paid">Paid:</label>
             <svelte:component 
                 this={NumberBox} 
-                
                 name={'paid'} 
                 step={0.01} 
                 drawerSlot={paid}
@@ -28,8 +26,7 @@
         </span>   
     </section>
     <svelte:component this={GiveChangeButton}></svelte:component>
-    <!-- <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button> -->
-</form>
+</section>
 
 <style>
     .wrapper{
