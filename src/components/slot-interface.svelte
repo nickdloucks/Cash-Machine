@@ -21,7 +21,7 @@
 
     const validate = function(event: any, userInput: number = validatedTotal, unitVal: number = slotUnitVal):void{ // validate user input and alter the value in the drawer store
         event.preventDefault(); // Prevent page reload
-        userInput = Math.round(userInput); // validate input: must be an integer
+        userInput = Number(Math.round(userInput)) || 0; // validate input: must be an integer
         console.log('rounded input' + userInput)
         let newSlotTotal = userInput * unitVal; // multiply the slot's unit value by the unit count (example: 2 $5 bills means a total slot value of $10)
         drawerSlot.update(n => n = Math.round(100 * newSlotTotal) / 100); // update the drawersSlot store value, rounded to the nearest penny
