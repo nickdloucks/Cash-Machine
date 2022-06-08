@@ -8,22 +8,16 @@
 
     const minimum: number = 0;
     
-    const ELEMENT_ID = name.concat('-input-box');
-
     $: slotTotal = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
     $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
-    
-    const validate = function(event: MouseEvent):void{ // validate user input and alter the value in the drawer store
+
+    $: validatedIn = slotTotal; // validated input
+
+    const validate = function(event: any):void{ // validate user input and alter the value in the drawer store
         event.preventDefault();
-
-        if((slotTotal % step) !== 0){
-            slotTotal -= (slotTotal % step);
-        }
-
-        drawerSlot.update(n => n = Math.floor(100 * slotTotal) / 100);
+        validatedIn = Number(validatedIn) || 0; // ensures the validated input is always a number even if a letter key is pressed
+        drawerSlot.update(n => n = Math.round(100 * validatedIn) / 100);
     }
-    // let extra = ((slotTotal % step) > 0) ? slotTotal % step : 0;
-    // 
 
     const directlyEditable = function(){
         return !editable;
@@ -32,19 +26,18 @@
 
 <span>
     <input 
-        id={ELEMENT_ID}
+        
         class="money-in"
         type="number"
         inputmode="numeric"
         name={name}
-        bind:value={slotTotal} 
+        bind:value={validatedIn} 
         placeholder={'$ 0.00'}
         min={minimum}
         step={step}
-
+        on:input={validate}
         readonly={directlyEditable()}
         >
-    <button on:click={validate}>set</button>
     <p>{slotDisplay}</p>
     <p>{$drawerSlot}</p>
 </span>
