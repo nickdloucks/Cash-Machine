@@ -1,4 +1,4 @@
-import { Writable, writable } from 'svelte/store'; // import both the type and the API
+import { writable } from 'svelte/store'; // import both the type and the API
 import type { MoneyInstance, writableSlots } from '../global';
 
 export const MONEY: ReadonlyArray<[string, number]> = [
@@ -32,7 +32,7 @@ export const tillHundreds = writable(100.0);
 
 export const drawerSlots = [tillPennies, tillNickles, tillDimes, tillQuarters, tillOnes, tillFives, tillTens, tillTwenties, tillHundreds];
 
-export const cashInTill: Array<[string, (Writable<number> | number)]> = [ 
+export const cashInTill: Array<MoneyInstance> = [ 
     // Array for keeping track of the till state. // : Array<[string,(number | Writable<number>)]> | []
     ['PENNY', tillPennies],
     ['NICKEL', tillNickles],
