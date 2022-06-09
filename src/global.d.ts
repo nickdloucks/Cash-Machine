@@ -13,6 +13,14 @@ declare interface writableSlots {
 
 declare type MoneyInstance = [string, (number | Writable<number>)];
 
+// MoneyInstance.copy = function(){
+//   let newCopy;
+//   for(let i = 0; i<this.length; i++){
+//     newCopy.push(this[i])
+//   }
+//   return newCopy;
+// }
+
 // enum MoneyTypes{
 //   1 = 'PENNY',
 //   2 = 'NICKLE',

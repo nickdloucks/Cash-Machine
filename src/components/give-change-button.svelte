@@ -1,19 +1,15 @@
 <script lang="ts">
-    import type {Writable} from 'svelte/store';
     import { default as makeChange } from '../make-change';
     import { price, paid, cashInTill, changePile, drawerSlots } from '../stores/cash-drawer';
     import type { MoneyInstance } from '../global'
 
     $: prodPrice = $price as number; // price of the product
     $: cashGiven = $paid as number; // payment given by customer
-    let change: Array<MoneyInstance> | [];
-    
-    // let slotNum = 0;
-    // const currentSlot = function(index: number = slotNum){
-    //     return drawerSlots[index];
-    // }
+    // let change: Array<MoneyInstance> | [];
 
+    // destructure array of slot store values and create a reactive, numeric variable for each:
     let [p,n,d,q,o,f,t,tw,h] = drawerSlots;
+    // These Writable<number> stores need to be converted to primitive numbers for use in the make-change program.
     $: totPennies = Number($p);
     $: totNickles = Number($n);
     $: totDimes = Number($d);    
@@ -23,9 +19,11 @@
     $: totTens = Number($t);    
     $: totTwenties = Number($tw);
     $: totHundreds = Number($h);
+    // ^ Not the most elegant solution, but store values have to be defined/ subscribed to/ declared 
+    // at the top level of the component in the version of Svelte that I am using. Thus, abstracting this out
+    // with a loop or callback function would not work.
 
-
-
+    // TO-DO: CREATE DEBUGGING DISPLAY FOR drawerBuffer
 
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
@@ -42,23 +40,29 @@
             ['TWENTY', totTwenties], // ADD $50 BILL SPOT
             ['ONE HUNDRED', totHundreds],
         ]
-
-        drawerBuffer.forEach((money) => {
-            console.log(money[0], ' ', money[1])
-        })
-            
+        // DEBUGGING:
+        // drawerBuffer.forEach((money) => {
+        //     console.log(money[0], ' ', money[1])
+        // })
+        // console.log('value:  ^')   
         
-        console.log('value:  ^')
-        return;
+        
+        
         
         // copy the list of money slots in the cash drawer as well as their current values
         //^ NB: the buffer array above will be mutated during the makeChange function execution. 
         // It's value will need to be written to the store after the makeChange function has run.
         let transaction = makeChange(prodPrice, cashGiven, drawerBuffer);
-        change = transaction.change; // update store value
+        let change: Array<MoneyInstance> | [] = transaction.change; // update store value
+
+        
         // cashInTill.forEach((storeVal)=>storeVal.update(n => n= newVal))
-        console.log('Till status: '.concat(transaction.status, transaction.message as string))
-        console.log(...change);
+        console.log('Till status: '.concat(transaction.status));
+        if(transaction.message){
+            console.log('errormessage:', transaction.message as string);
+        }
+        console.log('change given:', ...change);
+        return;
     }
 </script>
 

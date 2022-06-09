@@ -13,7 +13,6 @@
  */
 
 import { MONEY } from './stores/cash-drawer';
-import type { Writable } from 'svelte/store';
 import type { MoneyInstance, TillStatus } from './global';
 
 // TODO: change the places where cid is mutated: it needs to be more deliberate with types (like Writable<number>) so it's auto-updating the store
@@ -29,7 +28,9 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   let changePile: Array<MoneyInstance> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
 
-
+  // console.log('hello from main program...')
+  // changes to drawerBuffer work
+  // console.log(...cid)
   function precise(decimal: number): number {
     return Math.round(100 * decimal) / 100; // All money values should be given to the nearest hundredth
     // This function helps since Javascript is not as prcise with decimal numbers as other lanaguages like Python.
@@ -53,18 +54,31 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   } else if (totalTill === stillDue_$) {
     // customer is owed the exact ammount of change in the till
     // give customer all the change and close out the till
-    return { status: 'CLOSED', change: cid };
+    // let drawerTotal = cid.slice();
+    cid.forEach((slot: MoneyInstance)=>{
+      // add a copy of entire slot to ChangePile; then set original cid[slot value] to zero
+      // BE CAREFUL NOT TO SET BOTH TO ZERO
+      let slotCopy: MoneyInstance = [...slot]; // copy slot, passing items * by value *
+      if(slotCopy[1] > 0){ // only add the copy to the change pile if the slot was not already empty
+          changePile.push(slotCopy);
+      }
+      slot[1] = 0; // values need to be set to 0 so the writable<number> stores for each slot will reflect an empty drawer after the transaction
+    });
+    console.log('All slots should be empty', 'drawerTotal:', ...cid);
+    return { status: 'CLOSED', change: changePile };
   } else { // when totalTill > stillDue_$
     ////////////////////////////////////////////////////////////////////////////////////
     function recurseCount(owed_$: number = stillDue_$, index_$: number): void {
+      console.log('RECURSE:', MONEY[index_$][0], '$', stillDue_$)
+
       if (owed_$ === 0 || index_$ < 0) {  // Stop recursion if no more money is owed,
         return; // or there are no more types/units of money that could be given out for the remainder.
       }
       
-      let slotVal: number = cid[index_$][1] as number; // alias for total value of the money in the current bill/coin slot
+      let slotTotal: number = cid[index_$][1] as number; // alias for total value of the money in the current bill/coin slot
       let unitVal: number = MONEY[index_$][1] as number; // alias for unit value of current bill/coin
 
-      if (slotVal == 0 || owed_$ < unitVal) {
+      if (slotTotal == 0 || owed_$ < unitVal) {
         // no $ in current slot, or the current denomination/unit size is too big to give out
         recurseCount(owed_$, index_$ - 1); // move on to next-biggest money slot
         return;
@@ -73,18 +87,19 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
       let type_$ = MONEY[index_$][0]; // alias for name of current bill/coin (not needed if current slot is being skipped using subroutine directly above)
 
       // 1 EXACT UNIT-POP SUBROUTINE:
-      if (owed_$ == unitVal) { // the ammount stillowed$ is equal to the unit value of the current bill/coin
+      // don't remove if empty
+      if (owed_$ == unitVal && slotTotal >= unitVal) { // the ammount stillowed$ is equal to the unit value of the current bill/coin
         changePile.push([type_$, owed_$]); // add the $ name and value to the change pile to be given to customer
         (cid[index_$][1] as number) -= owed_$; // remove from till
         return;
-      } else if (owed_$ > unitVal) {
+      } else if (owed_$ >= unitVal && slotTotal >= unitVal) {// don't remove if empty
         // ITERATIVE UNIT-POP SUBROUTINE:
 
         let remainder = owed_$ % unitVal; // change still due that cannot be fulfilled from the current slot
-        let maxFromSlot = owed_$ - remainder; // max possible value of $ to be given from this slot (example: how much change in $1 bills if 1.00 is the current unitVal)
+        let maxFromSlot = owed_$ - precise(remainder); // max possible value of $ to be given from this slot (example: how much change in $1 bills if 1.00 is the current unitVal)
 
         let unitCount = 0;
-        while ((unitCount < slotVal / unitVal) && (unitCount < maxFromSlot / unitVal)) {
+        while ((unitCount < slotTotal / unitVal) && (unitCount < maxFromSlot / unitVal)) {
           unitCount += 1; // Count how many instances of the current bill you can give out
         }
 
@@ -108,7 +123,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     recurseCount(stillDue_$, cid.length - 1);
     ///////////////////////////////////////
   }
-  if (stillDue_$ > 0.0001) {
+  if (precise(stillDue_$) > 0) { //old version: (stillDue_$ > 0.0001)
     // At this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
