@@ -14,40 +14,33 @@
     // }
 
     let [p,n,d,q,o,f,t,tw,h] = drawerSlots;
-    $: pennies = Number($p);
-    $: nickles = Number($n);
-    $: dimes = Number($d);    
-    $: quarters = Number($q);
-    $: ones = Number($o);    
-    $: fives = Number($f);
-    $: tens = Number($t);    
-    $: twenties = Number($tw);
-    $: hundreds = Number($h);
+    $: totPennies = Number($p);
+    $: totNickles = Number($n);
+    $: totDimes = Number($d);    
+    $: totQuarters = Number($q);
+    $: totOnes = Number($o);    
+    $: totFives = Number($f);
+    $: totTens = Number($t);    
+    $: totTwenties = Number($tw);
+    $: totHundreds = Number($h);
 
 
 
 
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
-        // let drawerBuffer: Array<MoneyInstance> = cashInTill.map((money: MoneyInstance, index: number)=>{ // convert type: Writable<number> ==> number
-        //     let [name, _value] = money; // destructure the MoneyInstance for type reassignment
-        //     slotNum = index; // change which slot is being focused on
-        //     let bufferVal: number = Number(currentSlot()); // save numeric value of current slot
-            
-        //     return [name as string, bufferVal]; 
-        //     // convert value from Writable<number> to a number so it can be used in the make-change program
-        // });
+
         let drawerBuffer: Array<MoneyInstance> = [
             // needs to be inside handler function to copy values w/o breaking relationship between the reactive variables above and the storeVals
-            ['PENNY', pennies],
-            ['NICKEL', nickles],
-            ['DIME', dimes],
-            ['QUARTER', quarters],
-            ['ONE', ones],
-            ['FIVE', fives],
-            ['TEN', tens],
-            ['TWENTY', twenties], // ADD $50 BILL SPOT
-            ['ONE HUNDRED', hundreds],
+            ['PENNY', totPennies],
+            ['NICKEL', totNickles],
+            ['DIME', totDimes],
+            ['QUARTER', totQuarters],
+            ['ONE', totOnes],
+            ['FIVE', totFives],
+            ['TEN', totTens],
+            ['TWENTY', totTwenties], // ADD $50 BILL SPOT
+            ['ONE HUNDRED', totHundreds],
         ]
 
         drawerBuffer.forEach((money) => {
@@ -60,12 +53,10 @@
         
         // copy the list of money slots in the cash drawer as well as their current values
         //^ NB: the buffer array above will be mutated during the makeChange function execution. 
-        // It's value will need to be written to the store after the mackChange function has run.
+        // It's value will need to be written to the store after the makeChange function has run.
         let transaction = makeChange(prodPrice, cashGiven, drawerBuffer);
         change = transaction.change; // update store value
-        // MIGHT BE A CONCURRENT MODIFFICATION PROBLEM? ERRORS GO AWAY WHEN '$' IS REMOVED FROM <cashInTill> argument
-        // cashInTill = drawerBuffer;
-        // tillPennies.set(change[0][1]);
+        // cashInTill.forEach((storeVal)=>storeVal.update(n => n= newVal))
         console.log('Till status: '.concat(transaction.status, transaction.message as string))
         console.log(...change);
     }
