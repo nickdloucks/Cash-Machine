@@ -38,13 +38,15 @@
         on:input={validate}
         readonly={directlyEditable()}
         >
-    <p>{slotDisplay}</p>
-    <p>{$drawerSlot}</p>
+    <p class="slot-value">{slotDisplay}</p>
 </span>
 
 <style>
     .money-in{
         width: 5rem;
         height: min-content;
+    }
+    .slot-value{
+        width: max-content;
     }
 </style>
