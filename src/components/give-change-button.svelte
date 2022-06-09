@@ -8,22 +8,49 @@
     $: cashGiven = $paid as number; // payment given by customer
     let change: Array<MoneyInstance> | [];
     
-    let slotNum = 0;
-    $: currentSlot = drawerSlots[slotNum];
+    // let slotNum = 0;
+    // const currentSlot = function(index: number = slotNum){
+    //     return drawerSlots[index];
+    // }
+
+    let [p,n,d,q,o,f,t,tw,h] = drawerSlots;
+    $: pennies = Number($p);
+    $: nickles = Number($n);
+    $: dimes = Number($d);    
+    $: quarters = Number($q);
+    $: ones = Number($o);    
+    $: fives = Number($f);
+    $: tens = Number($t);    
+    $: twenties = Number($tw);
+    $: hundreds = Number($h);
+
+    $: drawerBuffer = [
+        ['PENNY', pennies],
+        ['NICKEL', nickles],
+        ['DIME', dimes],
+        ['QUARTER', quarters],
+        ['ONE', ones],
+        ['FIVE', fives],
+        ['TEN', tens],
+        ['TWENTY', twenties], // ADD $50 BILL SPOT
+        ['ONE HUNDRED', hundreds],
+    ]
+
 
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
-        let drawerBuffer: Array<MoneyInstance> = cashInTill.map((money: MoneyInstance, index: number, array)=>{ // convert type: Writable<number> ==> number
-            let [name, _value] = money; // destructure the MoneyInstance for type reassignment
-            slotNum = index; // change which slot is being focused on
-            let bufferVal: number = Number($currentSlot); // save numeric value of current slot
-            return [name as string, bufferVal]; 
-            // convert value from Writable<number> to a number so it can be used in the make-change program
-        });
-
-        // for(let i = 0, i < drawerBuffer.length; i++){
-        //     console.log(drawerBuffer[i][1]);
-        // }
+        // let drawerBuffer: Array<MoneyInstance> = cashInTill.map((money: MoneyInstance, index: number)=>{ // convert type: Writable<number> ==> number
+        //     let [name, _value] = money; // destructure the MoneyInstance for type reassignment
+        //     slotNum = index; // change which slot is being focused on
+        //     let bufferVal: number = Number(currentSlot()); // save numeric value of current slot
+            
+        //     return [name as string, bufferVal]; 
+        //     // convert value from Writable<number> to a number so it can be used in the make-change program
+        // });
+        
+        drawerBuffer.forEach((money) => {
+            console.log(money[0], ' ', money[1])
+        })
             
         
         console.log('value:  ^')
