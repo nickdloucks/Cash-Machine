@@ -1,26 +1,32 @@
 <script lang="ts">
     import type {Writable} from 'svelte/store';
     import { default as makeChange } from '../make-change';
-    import { price, paid, cashInTill, changePile } from '../stores/cash-drawer';
+    import { price, paid, cashInTill, changePile, drawerSlots } from '../stores/cash-drawer';
     import type { MoneyInstance } from '../global'
 
     $: prodPrice = $price as number; // price of the product
     $: cashGiven = $paid as number; // payment given by customer
     let change: Array<MoneyInstance> | [];
+    
+    let slotNum = 0;
+    $: currentSlot = drawerSlots[slotNum];
 
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
-        let drawerBuffer: Array<MoneyInstance> = cashInTill.slice(); 
-        // drawerBuffer.forEach((money: MoneyInstance)=>{
-        //     console.log(money[1])
-        // })
-        
-        drawerBuffer.forEach((money: MoneyInstance)=>{ // convert type: Writable<number> ==> number
-            let [name, value] = money; // destructure the MoneyInstance for type reassignment
-            return [name as string, value as number]; 
+        let drawerBuffer: Array<MoneyInstance> = cashInTill.map((money: MoneyInstance, index: number, array)=>{ // convert type: Writable<number> ==> number
+            let [name, _value] = money; // destructure the MoneyInstance for type reassignment
+            slotNum = index; // change which slot is being focused on
+            let bufferVal: number = Number($currentSlot); // save numeric value of current slot
+            return [name as string, bufferVal]; 
             // convert value from Writable<number> to a number so it can be used in the make-change program
         });
-        console.log(...drawerBuffer)
+
+        // for(let i = 0, i < drawerBuffer.length; i++){
+        //     console.log(drawerBuffer[i][1]);
+        // }
+            
+        
+        console.log('value:  ^')
         return;
         
         // copy the list of money slots in the cash drawer as well as their current values
