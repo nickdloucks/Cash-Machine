@@ -11,16 +11,17 @@
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
         let drawerBuffer: Array<MoneyInstance> = cashInTill.slice(); 
-        drawerBuffer.forEach((money: MoneyInstance)=>{
-            console.log(money[1])
-        })
-        return;
-        drawerBuffer.forEach((money)=>{ // convert type: Writable<number> ==> number
+        // drawerBuffer.forEach((money: MoneyInstance)=>{
+        //     console.log(money[1])
+        // })
+        
+        drawerBuffer.forEach((money: MoneyInstance)=>{ // convert type: Writable<number> ==> number
             let [name, value] = money; // destructure the MoneyInstance for type reassignment
             return [name as string, value as number]; 
             // convert value from Writable<number> to a number so it can be used in the make-change program
         });
-
+        console.log(...drawerBuffer)
+        return;
         
         // copy the list of money slots in the cash drawer as well as their current values
         //^ NB: the buffer array above will be mutated during the makeChange function execution. 
