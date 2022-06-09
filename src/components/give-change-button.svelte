@@ -24,17 +24,7 @@
     $: twenties = Number($tw);
     $: hundreds = Number($h);
 
-    $: drawerBuffer = [
-        ['PENNY', pennies],
-        ['NICKEL', nickles],
-        ['DIME', dimes],
-        ['QUARTER', quarters],
-        ['ONE', ones],
-        ['FIVE', fives],
-        ['TEN', tens],
-        ['TWENTY', twenties], // ADD $50 BILL SPOT
-        ['ONE HUNDRED', hundreds],
-    ]
+
 
 
     function drawerInterface(event: MouseEvent): void {
@@ -47,7 +37,19 @@
         //     return [name as string, bufferVal]; 
         //     // convert value from Writable<number> to a number so it can be used in the make-change program
         // });
-        
+        let drawerBuffer: Array<MoneyInstance> = [
+            // needs to be inside handler function to copy values w/o breaking relationship between the reactive variables above and the storeVals
+            ['PENNY', pennies],
+            ['NICKEL', nickles],
+            ['DIME', dimes],
+            ['QUARTER', quarters],
+            ['ONE', ones],
+            ['FIVE', fives],
+            ['TEN', tens],
+            ['TWENTY', twenties], // ADD $50 BILL SPOT
+            ['ONE HUNDRED', hundreds],
+        ]
+
         drawerBuffer.forEach((money) => {
             console.log(money[0], ' ', money[1])
         })
