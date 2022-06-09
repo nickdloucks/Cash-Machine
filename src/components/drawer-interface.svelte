@@ -1,7 +1,7 @@
 <script lang="ts">
     import NumberBox from './number-input-box.svelte';
     import { cashInTill, drawerSlots, MONEY } from '../stores/cash-drawer';
-    import RandomButton from './random-button.svelte';
+    import RandomButton from './randomize-button.svelte';
     import EmptyButton from './empty-drawer.svelte';
     import SlotInterface from './slot-interface.svelte';
     
