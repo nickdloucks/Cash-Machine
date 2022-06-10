@@ -24,7 +24,7 @@
     // with a loop or callback function would not work.
 
     // TO-DO: CREATE DEBUGGING DISPLAY FOR drawerBuffer
-
+    $: status = 'OPEN';
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
 
@@ -58,12 +58,19 @@
         
         // cashInTill.forEach((storeVal)=>storeVal.update(n => n= newVal))
         console.log('Till status: '.concat(transaction.status));
+        status = transaction.status;
         if(transaction.message){
             console.log('errormessage:', transaction.message as string);
         }
         console.log('change given:', ...change);
+        console.log(...drawerBuffer)
+        drawerSlots.forEach((slot, index)=>{
+            slot.update(n => drawerBuffer[index][1] as number);
+            // use the drawerBuffer to update the state of the cash drawer
+        });
         return;
     }
 </script>
 
 <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button>
+<p>Status: {status}</p>
