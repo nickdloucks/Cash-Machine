@@ -1,11 +1,12 @@
 <script lang="ts">
     import { default as makeChange } from '../make-change';
-    import { price, paid, changePile, drawerSlots } from '../stores/cash-drawer';
-    import type { MoneyInstance } from '../global'
+    import { price, paid, drawerSlots } from '../stores/cash-drawer';
+    import type { MoneyInstance } from '../global';
+    import MoneyPile2 from './money-pile2.svelte';
 
     $: prodPrice = $price as number; // price of the product
     $: cashGiven = $paid as number; // payment given by customer
-    // let change: Array<MoneyInstance> | [];
+
 
     // destructure array of slot store values and create a reactive, numeric variable for each:
     let [p,n,d,q,o,f,t,tw,h] = drawerSlots;
@@ -27,6 +28,15 @@
     $: status = 'OPEN';
     $: errorMessage = '';
     $: message = errorMessage || '';
+    
+    let changePile: Array<MoneyInstance> | [] = [];
+
+    function stackUpChange(newPile: Array<MoneyInstance>){
+        changePile.length = 0; // delete the record of change given on the previous transaction
+        changePile = [...newPile]; // update the changePile to the new set of money given out by the most recent transaction
+    }
+
+    $: pileOfChange = changePile; // reactive to any updates to the changePile, which is updated with each transaction
 
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
@@ -50,17 +60,16 @@
         // It's value will need to be written to the store after the makeChange function has run.
         let transaction = makeChange(prodPrice, cashGiven, drawerBuffer);
         let change: Array<MoneyInstance> | [] = transaction.change; // update store value
+        stackUpChange(change);
 
-        
-        // cashInTill.forEach((storeVal)=>storeVal.update(n => n= newVal))
-        console.log('Till status: '.concat(transaction.status));
         status = transaction.status;
+
         if(transaction.message){
-            console.log('errormessage:', transaction.message as string);
+            console.log('error message:', transaction.message as string);
             errorMessage = transaction.message;
         }
         console.log('change given:', ...change);
-        console.log(...drawerBuffer)
+        console.log('remaining in drawer: ', ...drawerBuffer)
         drawerSlots.forEach((slot, index)=>{
             slot.update(n => drawerBuffer[index][1] as number);
             // use the drawerBuffer to update the state of the cash drawer and the change pile
@@ -71,4 +80,7 @@
 
 <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button>
 <p>Drawer Status: {status}</p>
-<p>{message}</p>
+{#if (errorMessage.length)}
+    <p>{message}</p>
+{/if}
+<svelte:component this={MoneyPile2} pile={pileOfChange}></svelte:component>
