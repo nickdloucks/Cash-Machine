@@ -1,6 +1,6 @@
 <script lang="ts">
     import { default as makeChange } from '../make-change';
-    import { price, paid, cashInTill, changePile, drawerSlots } from '../stores/cash-drawer';
+    import { price, paid, changePile, drawerSlots } from '../stores/cash-drawer';
     import type { MoneyInstance } from '../global'
 
     $: prodPrice = $price as number; // price of the product
@@ -25,6 +25,9 @@
 
     // TO-DO: CREATE DEBUGGING DISPLAY FOR drawerBuffer
     $: status = 'OPEN';
+    $: errorMessage = '';
+    $: message = errorMessage || '';
+
     function drawerInterface(event: MouseEvent): void {
         event.preventDefault();
 
@@ -39,15 +42,8 @@
             ['TEN', totTens],
             ['TWENTY', totTwenties], // ADD $50 BILL SPOT
             ['ONE HUNDRED', totHundreds],
-        ]
-        // DEBUGGING:
-        // drawerBuffer.forEach((money) => {
-        //     console.log(money[0], ' ', money[1])
-        // })
-        // console.log('value:  ^')   
-        
-        
-        
+        ];
+              
         
         // copy the list of money slots in the cash drawer as well as their current values
         //^ NB: the buffer array above will be mutated during the makeChange function execution. 
@@ -61,16 +57,18 @@
         status = transaction.status;
         if(transaction.message){
             console.log('errormessage:', transaction.message as string);
+            errorMessage = transaction.message;
         }
         console.log('change given:', ...change);
         console.log(...drawerBuffer)
         drawerSlots.forEach((slot, index)=>{
             slot.update(n => drawerBuffer[index][1] as number);
-            // use the drawerBuffer to update the state of the cash drawer
+            // use the drawerBuffer to update the state of the cash drawer and the change pile
         });
         return;
     }
 </script>
 
 <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button>
-<p>Status: {status}</p>
+<p>Drawer Status: {status}</p>
+<p>{message}</p>
