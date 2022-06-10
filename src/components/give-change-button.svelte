@@ -29,6 +29,7 @@
     $: errorMessage = '';
     $: message = errorMessage || '';
     
+    // Array representing change given to customer after a sale:
     let changePile: Array<MoneyInstance> | [] = [];
 
     function stackUpChange(newPile: Array<MoneyInstance>){

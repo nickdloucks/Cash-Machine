@@ -45,29 +45,8 @@ export const cashInTill: Array<MoneyInstance> = [
     ['ONE HUNDRED', tillHundreds],
 ];
 
-// Array representing change given to customer after a sale:
-export let changePile: Array<MoneyInstance> = [
-//   ['PENNY', 1.01],
-//   ['NICKEL', 2.05],
-//   ['DIME', 3.1],
-//   ['QUARTER', 4.25],
-//   ['ONE', 90],
-//   ['FIVE', 55],
-//   ['TEN', 20],
-//   ['TWENTY', 60],
-//   ['ONE HUNDRED', 100],
-// ];
 
-  ['PENNY', 0.00],
-  ['NICKEL', 0.00],
-  ['DIME', 0.00],
-  ['QUARTER', 0.00],
-  ['ONE', 0.00],
-  ['FIVE', 0.00],
-  ['TEN', 0.00],
-  ['TWENTY', 0.00],
-  ['ONE HUNDRED', 0.000],
-];
+
 
 // RANDOM TILL STATE:
 // [
