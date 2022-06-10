@@ -2,6 +2,8 @@
     import NumberBox from './number-input-box.svelte';
     import { price, paid } from '../stores/cash-drawer';
     import GiveChangeButton from './give-change-button.svelte';
+
+    $: due = `$${String(Number($paid - $price).toFixed(2))}`;
 </script>
 
 <section class="wrapper">
@@ -23,7 +25,10 @@
                 step={0.01} 
                 drawerSlot={paid}
                 editable={true}></svelte:component>
-        </span>   
+        </span>  
+        <span>
+            <p>Change Due: {due}</p>
+        </span>
     </section>
     <svelte:component this={GiveChangeButton}></svelte:component>
 </section>
