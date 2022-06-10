@@ -24,7 +24,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   price = precise(price); // Ensure money params are w/ in desired precision
   cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
 
-  let stillDue_$ = cash - price; // Init. variable: amount of money the customer is still owed
+  let stillDue_$ = precise(cash - price); // Init. variable: amount of money the customer is still owed
   let changePile: Array<MoneyInstance> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
 
