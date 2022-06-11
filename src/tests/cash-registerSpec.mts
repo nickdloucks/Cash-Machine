@@ -1,4 +1,4 @@
-import { default as useTill } from '../utilities/make-change.js-change.js';
+import { default as useTill } from '../utilities/make-change.js';
 
 xdescribe('A cash register', ()=>{
     it('returns an object.', ()=>{
