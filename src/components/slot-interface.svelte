@@ -11,7 +11,7 @@
     // slot total will initially be 0, while store value for the slot is displayed to side
 
     $: roundedSlot = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
-    $: slotDisplay = "$ ".concat(String(roundedSlot.toFixed(2))); // The slot's dollar value formatted as money. ex: $0.00
+    $: slotDisplay = "$".concat(String(roundedSlot.toFixed(2))); // The slot's dollar value formatted as money. ex: $0.00
     $: validatedTotal = Math.round(roundedSlot / slotUnitVal);
 
     const validate = function(event: any, userInput: number = validatedTotal, unitVal: number = slotUnitVal):void{ // validate user input and alter the value in the drawer store
@@ -67,12 +67,13 @@
     }
     .money-slot-input{
         width: 4rem;
-
+        margin: auto;
         height: min-content;
+        border: 2px solid #cccccc;
     }
     .slot-value{
         background-color: #000;
-        font-size: 100%;
+        font-size: 1em;
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         width: 4rem;
