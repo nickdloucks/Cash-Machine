@@ -1,0 +1,26 @@
+{
+  "name": "Cash Machine PWA",
+  "short_name": "Cash Machine",
+  "description": "Progressive Web App that simulates a cash machine. It keeps track of the money in the drawer and calculates the proper change due to a customer.",
+  "icons": [
+    {
+        "src": "./../images/cahs1.png",
+        "sizes": "64x64 32x32 24x24 16x16",
+        "type": "image/png"
+    },
+    {
+        "src": "./../images/spash-screen-image-512x512-pwa.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    },
+    {
+        "src": "./../images/pwa-icon-ios.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#818181",
+  "background_color": "#818181"
+}
