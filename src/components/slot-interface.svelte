@@ -53,7 +53,7 @@
         display: inline-block;
         height: max-content;
         background-color: #000;
-        /* font-size: 1em; */
+        border-radius: 3px;
     }
     .slot-card{
         display: grid;
@@ -66,6 +66,7 @@
         text-align: center;
     }
     .money-slot-input{
+        text-align: center;
         width: 4rem;
         margin: auto;
         height: min-content;
@@ -77,5 +78,6 @@
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         width: 4rem;
+        border-radius: 3px;
     }
 </style>

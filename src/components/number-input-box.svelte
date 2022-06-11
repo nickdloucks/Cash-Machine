@@ -9,7 +9,7 @@
     const minimum: number = 0;
     
     $: slotTotal = Math.round(100 * Number($drawerSlot)) / 100 || 0; // Dollar value Total for this slot; default to an empty slot
-    $: slotDisplay = "$ ".concat(String(slotTotal.toFixed(2)));
+    $: slotDisplay = "$".concat(String(slotTotal.toFixed(2)));
 
     $: validatedIn = slotTotal; // validated input
 
@@ -26,7 +26,6 @@
 
 <span>
     <input 
-        
         class="money-in"
         type="number"
         inputmode="numeric"
@@ -43,14 +42,18 @@
 
 <style>
     .money-in{
-        width: 5rem;
+        text-align: center;
+        width: 4rem;
+        margin: auto;
         height: min-content;
+        border: 2px solid #cccccc;
     }
     .slot-value{
+        background-color: #000;
         font-size: 1em;
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
-        width: max-content;
-        color: #00ff00;
+        width: 4rem;
+        border-radius: 3px;
     }
 </style>
