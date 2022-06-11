@@ -27,7 +27,7 @@
                 editable={true}></svelte:component>
         </span>  
         <span>
-            <p>Change Due: {due}</p>
+            Change Due: <p class="slot-value">{due}</p>
         </span>
     </section>
     <svelte:component this={GiveChangeButton}></svelte:component>
@@ -50,5 +50,12 @@
     }
     .main-sale-in{
         width: fit-content;
+    }
+    .slot-value{
+        font-size: 1em;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        width: max-content;
+        color: #00ff00;
     }
 </style>

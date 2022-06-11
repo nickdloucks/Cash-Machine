@@ -47,6 +47,10 @@
         height: min-content;
     }
     .slot-value{
+        font-size: 1em;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
         width: max-content;
+        color: #00ff00;
     }
 </style>

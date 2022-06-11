@@ -49,25 +49,32 @@
 
 <style>
     .slot-label{
-        width: max-content;
+        width: 4rem;
         display: inline-block;
         height: max-content;
+        background-color: #000;
         /* font-size: 1em; */
     }
     .slot-card{
         display: grid;
         width: min-content;
-        background-image:radial-gradient(#556b2f, #008800);
+        /* background-image:radial-gradient(#556b2f, #008800); #00bfff, */
+        background-image: linear-gradient(45deg, #00008b,#4b0082);
         border-radius: 0.5em;
         width: 5rem;
         justify-content: center;
+        text-align: center;
     }
     .money-slot-input{
-        width: 2.5rem;
+        width: 4rem;
+
         height: min-content;
     }
     .slot-value{
-        /* font-size: 1em; */
-        width: max-content;
+        background-color: #000;
+        font-size: 100%;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        width: 4rem;
     }
 </style>

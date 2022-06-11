@@ -42,7 +42,7 @@ p, pre, section, div, li {
     font-size: 0.8em;
     padding: 0.8em;
     box-sizing: border-box;
-    margin: 0.8em;
+    margin: 0.5em;
     color: #ffffff;
 }
 
@@ -178,7 +178,7 @@ li{
     grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
     /* grid-auto-rows: minmax(30px, auto); */
     grid-gap: 24px;
-    padding: 2rem;
+    padding: 1rem;
     justify-items: center;
     align-items: center;
 }
