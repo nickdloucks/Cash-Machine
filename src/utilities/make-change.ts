@@ -12,15 +12,17 @@
  *      given to the customer is > 0. For example, ["$TYPE", 0.0] will not appear in the return value.
  */
 
-import { MONEY } from './stores/cash-drawer';
-import type { MoneyInstance, TillStatus } from './global';
+import { MONEY } from '../stores/cash-drawer';
+import type { MoneyInstance, TillStatus } from '../global';
+import { default as precise } from './precise';
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<MoneyInstance>): TillStatus {
   price = precise(price); // Ensure money params are w/ in desired precision
   cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
-
+  console.log('price:', price, 'paid:', cash)
   let stillDue_$ = precise(cash - price); // Init. variable: amount of money the customer is still owed
-
+  console.log('initial calc of change due: ', stillDue_$)
+  
   if(stillDue_$ < 0){ // do not process transactions where insufficient payment has been given
     return  { status: 'INSUFFICIENT_PAYMENT', message: 'Transaction not processed.', change: [] };
   }
@@ -28,10 +30,6 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   let changePile: Array<MoneyInstance> = []; // itemized breakdown of change to be given to the customer
   // ========= ^ STANDARD DATA NEEDED ====
 
-  function precise(decimal: number): number {
-    return Math.floor(100 * decimal) / 100; // All money values should be given to the nearest hundredth
-    // This function helps since Javascript is not as prcise with floating point numbers as other lanaguages like Python.
-  }
 
   //// Till COUNTING SUBROUTINE:
   function tillCount(arr2D: Array<MoneyInstance>) { // count up all the cash in the drawer
@@ -122,7 +120,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   if (precise(stillDue_$) > 0) {
     // At this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer.
-    return { status: 'INSUFFICIENT_FUNDS', change: [] };
+    return { status: 'INSUFFICIENT_FUNDS', message: 'Transaction not processed.', change: [] };
   } else {
     // At this point, the exact amount of change is given to the customer and the till is ready for the next transaction
     return { status: 'OPEN', change: changePile };
