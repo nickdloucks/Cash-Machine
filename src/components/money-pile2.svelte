@@ -27,7 +27,7 @@
 </ol>
 
 {:else}
-<p>No change given yet, or no change was due. Make a transaction.</p>
+<p>No change given: either no change was due, there were insufficient funds, or there was an error. Make a new transaction.</p>
 {/if}
 
 <style>
