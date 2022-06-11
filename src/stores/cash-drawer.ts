@@ -20,15 +20,15 @@ export const price = writable(10);
 export const paid = writable(20);
 
 // These Svelte store writables represent stateful slots in the cash drawer. They are readable and writable.
-export const tillPennies = writable(0.01);
-export const tillNickles = writable(0.05);
-export const tillDimes = writable(0.1);
-export const tillQuarters = writable(0.25);
-export const tillOnes = writable(1.0);
-export const tillFives = writable(5.0);
-export const tillTens = writable(10.0);
-export const tillTwenties = writable(20.0);
-export const tillHundreds = writable(100.0);
+export const tillPennies = writable(0.1);
+export const tillNickles = writable(0.15);
+export const tillDimes = writable(0.3);
+export const tillQuarters = writable(1.25);
+export const tillOnes = writable(10.0);
+export const tillFives = writable(25.0);
+export const tillTens = writable(100.0);
+export const tillTwenties = writable(120.0);
+export const tillHundreds = writable(300.0);
 
 export const drawerSlots = [tillPennies, tillNickles, tillDimes, tillQuarters, tillOnes, tillFives, tillTens, tillTwenties, tillHundreds];
 
