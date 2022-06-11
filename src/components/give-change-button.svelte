@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { default as makeChange } from '../make-change';
+    import { default as makeChange } from '../utilities/make-change';
     import { price, paid, drawerSlots } from '../stores/cash-drawer';
     import type { MoneyInstance } from '../global';
     import MoneyPile2 from './money-pile2.svelte';
+    import { default as precise } from '../utilities/precise'; // tool for keeping Javascript numbers precise when they are decimals
+
 
     $: prodPrice = $price as number; // price of the product
     $: cashGiven = $paid as number; // payment given by customer
@@ -68,11 +70,13 @@
         if(transaction.message){
             console.log('error message:', transaction.message as string);
             errorMessage = transaction.message;
+            return; // if there is an error message, cancel the transaction without taking money out of the drawer
         }
         console.log('change given:', ...change);
         console.log('remaining in drawer: ', ...drawerBuffer)
         drawerSlots.forEach((slot, index)=>{
-            slot.update(n => drawerBuffer[index][1] as number);
+            // if this block is reached, money needs to be taken out of the drawer
+            slot.update(n => precise(drawerBuffer[index][1] as number));
             // use the drawerBuffer to update the state of the cash drawer and the change pile
         });
         return;
@@ -82,6 +86,15 @@
 <button class="good-button" id="calc-change" on:click={drawerInterface}>Make Change</button>
 <p>Drawer Status: {status}</p>
 {#if (errorMessage.length)}
-    <p>{message}</p>
+    <p class='error-message'>{message}</p>
 {/if}
 <svelte:component this={MoneyPile2} pile={pileOfChange}></svelte:component>
+
+<style>
+    .error-message{
+        color: #ff0000;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+</style>
