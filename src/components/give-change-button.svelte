@@ -71,6 +71,8 @@
             console.log('error message:', transaction.message as string);
             errorMessage = transaction.message;
             return; // if there is an error message, cancel the transaction without taking money out of the drawer
+        }else{
+            errorMessage = ''; // make sure the error message does not remain on screen from a previous error
         }
         console.log('change given:', ...change);
         console.log('remaining in drawer: ', ...drawerBuffer)
