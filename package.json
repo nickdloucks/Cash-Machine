@@ -47,6 +47,7 @@
     "@tsconfig/svelte": "^2.0.0"
   },
   "dependencies": {
+    "gh-pages": "^4.0.0",
     "jasmine": "^3.99.0",
     "jasmine-spec-reporter": "^7.0.0",
     "sirv-cli": "^2.0.0"
